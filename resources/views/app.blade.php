@@ -17,8 +17,7 @@
         .prod01 {
             display: block;
             overflow: auto;
-            height: 200px;
-
+            height: 185px;
         }
         .prod1 {
             display: block;

@@ -33,10 +33,7 @@
                                         <th>#</th>
                                         <th>Nom Client</th>
                                         <th>Date Départ</th>
-                                        {{-- <th>Adults</th> --}}
                                         <th>Validation</th>
-                                        {{-- <th>Enfants</th>
-                                        <th>Statut</th> --}}
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -44,16 +41,9 @@
                                         <tr >
                                             <td align="center">{{ $index+1 }}</td>
                                             <td class="pl-0">
-                                                {{-- <div class="d-flex align-items-center">
-                                                    <label class="custom-control ios-switch">
-                                                    <input type="checkbox" class="ios-switch-control-input" {{$a->status != 0 ? "checked" : ""}}>
-                                                    <span class="ios-switch-control-indicator"></span>
-                                                    </label>
-                                                </div> --}}
                                                 <a href="{{url('clients/'. $a->Client_id .'/edit') }}">{{ $a->client_Nom }}</a>
                                             </td>
                                             <td >{{ $a->DateDepart }}</td>
-                                            {{-- <td align="center">{{ $a->Adults }}</td> --}}
                                             <td class="d-flex ">
                                                 <form action="{{url('reservations/'. $a->id.'/valide') }}" method="post">
                                                     @method('PATCH')
@@ -67,8 +57,6 @@
                                                 </form>
                                                 <a href="{{url('clients/'. $a->Client_id.'/edit') }}"><i class="fa fa-eye" style="color:black" ></i></a>
                                             </td>
-                                            {{-- <td >{{ $a->Enfants }}</td>
-                                            <td >{{ $a->status }}</td> --}}
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -81,14 +69,12 @@
                     <div class="col-lg-12">
                         <div class="card shadow-sm border" style="border-radius: 0.5rem">
                             <div class="card-body text-center">
-                                <canvas id="myChart1" height="170px"></canvas>
+                                <canvas id="myChart1" height="180px"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
-
             <div class="col-lg-7">
                 <div class="row ">
                     <div class="col-lg-12 mb-3">
@@ -113,7 +99,6 @@
 </div>
 
 
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" ></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -123,7 +108,7 @@
     const data = {
       labels: labels,
       datasets: [{
-        label: 'Reservations du mois',
+        label: 'Reservations',
         backgroundColor: 'rgb(0, 153, 204)',
         borderColor: 'rgb(255, 99, 132)',
         data: users,
@@ -147,7 +132,7 @@
       const data1 = {
         labels: labels,
         datasets: [{
-          label: 'Clients du mois',
+          label: 'Clients',
           backgroundColor: 'rgb(51, 51, 255)',
           borderColor: 'rgb(0, 255, 0)',
           data: users,
@@ -164,8 +149,6 @@
         config1
       );
 </script>
-
-
 
 
 @endsection
