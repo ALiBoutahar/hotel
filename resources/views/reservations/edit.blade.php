@@ -4,7 +4,7 @@
     {{-- <h1>Modifier adherent</h1> --}}
     <div class="row mt-3">
         <div class="col-lg-1">
-            <a class="btn btn-success " href="{{ url('reservations')}}"><</a>
+            <a class="btn btn-success " href="{{ url('reservations')}}"><i class="fas fa-arrow-circle-left" style="color:black"></i></a>
         </div>
         <div class="col-lg-11">
             <p align="center"><b>Modifier Reservations</b></p>

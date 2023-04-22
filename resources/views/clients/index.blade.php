@@ -69,9 +69,9 @@
                         <form action="{{ url('clients/'. $a->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a class="text-info ms-2 border-0 bg-transparent" href="{{url('clients/'. $a->id) }}">Voir</a>
-                            <a class="text-primary ms-2 border-0 bg-transparent" href="{{url('clients/'. $a->id .'/edit') }}">Modifier</a>
-                            <button type="submit" class="text-danger ms-2 border-0 bg-transparent">Supprimer</button>
+                            <a href="{{url('clients/'. $a->id) }}"><i class="fa fa-eye" style="color:black" ></i></a>
+                            <a href="{{url('clients/'. $a->id .'/edit') }}"><i class="fa fa-edit" style="color:rgb(4, 12, 249)" ></i></a>
+                            <button class="border-0 bg-transparent text-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>

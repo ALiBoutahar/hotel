@@ -50,10 +50,10 @@
                         <form action="{{ url('reservations/'. $a->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a class="text-info ms-2 border-0 bg-transparent" href="{{url('reservations/'. $a->id) }}">Voir</a>
-                            <a class="text-primary ms-2 border-0 bg-transparent" href="{{url('reservations/'. $a->id .'/edit') }}">Modifier</a>
-                            <button type="submit" class="text-danger ms-2 border-0 bg-transparent">Supprimer</button>
-                            <a class="text-success ms-2 border-0 bg-transparent" href="{{url('clients/'. $a->Client_id .'/edit') }}">add client</a>
+                            <a href="{{url('reservations/'. $a->id) }}"><i class="fa fa-eye" style="color:black" ></i></a>
+                            <a href="{{url('reservations/'. $a->id .'/edit') }}"><i class="fa fa-edit" style="color:rgb(4, 12, 249)" ></i></a>
+                            <button class="border-0 bg-transparent text-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                            <a href="{{url('clients/'. $a->Client_id .'/edit') }}"><i class="fas fa-sync-alt" style="color:rgb(37, 237, 23)" ></i></a>
                         </form>
                     </td>
                 </tr>
