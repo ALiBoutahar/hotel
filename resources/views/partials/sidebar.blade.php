@@ -69,21 +69,21 @@
           </a>
         </li>
         <li>
-            <a href="{{ url('reservations')}}" class="nav-link">
+            <a href="{{ url('Reservations')}}" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
               Reservations
             </a>
         </li>
         <li>
-            <a href="{{ url('clients')}}" class="nav-link">
+            <a href="{{ url('Clients')}}" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
               Clients
             </a>
         </li>
         <li>
-            <a href="{{ url('chambers')}}" class="nav-link">
+            <a href="{{ url('Chambers')}}" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-              Chambers
+              Chambres
             </a>
         </li>
         {{-- <li>
@@ -98,14 +98,33 @@
       <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
           <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-          <strong>mdo</strong>
+          <strong>{{ Auth::user()->name }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li>
-          <li><a class="dropdown-item" href="#">Profile</a></li>
+          {{-- <li><a class="dropdown-item" href="#">New project...</a></li>
+          <li><a class="dropdown-item" href="#">Settings</a></li> --}}
+          <li>
+            <x-responsive-nav-link :href="route('profile.edit')">
+                {{ __('Profile') }}
+            </x-responsive-nav-link>
+          </li>
           <li><hr class="dropdown-divider"></li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
+          <li>
+            <a href="{{ url('register')}}">
+                Register
+            </a>
+        </li>
+          <li>
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <x-responsive-nav-link :href="route('logout')"
+                        onclick="event.preventDefault();
+                                    this.closest('form').submit();">
+                    {{ __('Log Out') }}
+                </x-responsive-nav-link>
+            </form>
+          </li>
         </ul>
       </div>
     </div>
