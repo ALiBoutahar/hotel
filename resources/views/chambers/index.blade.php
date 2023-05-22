@@ -8,6 +8,7 @@
             <div class="col-lg-8">
                 <h3>List des chambers</h3>
             </div>
+
             <div class="col-lg-2">
                 <form class="d-flex" name="form1">
                     <input id="search-input" type="search" name="search1" id="search1" onchange="form1.submit()"
@@ -23,7 +24,7 @@
         @if ( count($chambers)==0)
             <br>
             <div class="alert alert-success">
-                <p class="text-center"><b>Aucune chambers enregistrer</b></p>
+                <p align="center"><b>Aucune chambers enregistrer</b></p>
             </div>
         @else
         <div class="prod1">
@@ -37,23 +38,25 @@
                     <th>images</th>
                     <th class="text-center">Actions</th>
                 </tr>
-                @foreach ($chambers as $index => $chamber)
+                @foreach ($chambers as $index => $a)
                 <tr class="text-dark">
                     <td >{{ $index+1 }}</td>
-                    <td >{{ $chamber->NChambre }}</td>
-                    <td >{{ $chamber->titre }}</td>
-                    <td>{{ $chamber->Description }}</td>
-                    <td >{{ $chamber->prix }}</td>
+                    <td >{{ $a->NChambre }}</td>
+                    <td >{{ $a->titre }}</td>
+                    <td style="width:200px;">{{ $a->Description }}</td>
+                    <td >{{ $a->prix }}</td>
                     <td>
-                        {{-- {{count($chamber->images)}} images --}}
+                        @php [$data = json_decode($a->images) , ($nbr = count($data))]@endphp
+                        {{$nbr}} images
+                        
                     </td>
                     <td class="text-center">
-                        <form action="{{ url('chambers/'. $chamber->id) }}" method="POST">
+                        <form action="{{ url('chambers/'. $a->id) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <a  href="{{url('chambers/'. $chamber->id) }}"><i class="fa fa-eye" style="color:black" ></i></a>
-                            <a  href="{{url('chambers/'. $chamber->id .'/edit') }}"><i class="fa fa-edit" style="color:rgb(4, 12, 249)" ></i></a>
-                            <button class="border-0 mx-0 px-0 bg-transparent text-danger" type="submit"><i class="fas fa-trash-alt"></i></button>
+                            <a  href="{{url('chambers/'. $a->id) }}"><i class="fa fa-eye" style="color:black" ></i></a>
+                            <a  href="{{url('chambers/'. $a->id .'/edit') }}" style="margin-left:10px"><i class="fa fa-edit" style="color:rgb(4, 12, 249)" ></i></a>
+                            <button class="border-0 bg-transparent text-danger" type="submit" style="margin-left:10px"><i class="fas fa-trash-alt"></i></button>
                         </form>
                     </td>
                 </tr>

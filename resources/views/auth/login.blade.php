@@ -1,34 +1,46 @@
-<x-guest-layout>
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
-                    <form method="POST" action="{{ route('login') }}">
+@extends('layouts.app')
+
+@section('content')
+<div class="container mt-1">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{-- <div class="card mb-2" align="center">
+                <div class="card-header"><h2 class="text-info">{{ __('La chambotte') }}</h2></div>
+            </div> --}}
+            <div class="card" align="center">
+                <div class="card-header"><h2>{{ __('Connexion') }}</h2></div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}" class="row justify-content-center py-3">
                         @csrf
-                        <h3 class="fw-bold mb-2 text-warning">La Chambotte</h3>
-                        <h3 class="fw-bold mb-4 text-success">Login</h3>
 
-                        <div class="form-outline form-white mb-4">
-                            <input type="email" id="typeEmailX" placeholder="E-mail" class="form-control form-control-lg" name="email" :value="old('email')" />
-                            {{-- <label class="form-label" for="typeEmailX">Email</label> --}}
+                        <div class="col-md-10 mb-3 py-2">
+                            <input id="email" type="email" class="form-control" placeholder="E-mail" @error('email') is-invalid @enderror name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            @error('email')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
-                        <div class="form-outline form-white mb-4">
-                            <input type="password" id="typePasswordX" placeholder="Password" class="form-control form-control-lg" name="password" />
-                            {{-- <label class="form-label" for="typePasswordX">Password</label> --}}
+                        <div class="col-md-10 mb-3 py-2">
+                            <input id="password" type="password" class="form-control "placeholder="Mot de pass" @error('password') is-invalid @enderror name="password" required autocomplete="current-password">
+                            @error('password')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>
 
-                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
-                            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-
-                        <button class="btn btn-outline-light btn-lg px-5" type="submit">{{ __('Log in') }}</button>
+                        <div class="col-md-10 py-2" align="center">
+                            <button type="submit" class="btn btn-primary col-md-12">
+                                {{ __('Se Connecter') }}
+                            </button>
+                        </div>
                     </form>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
-</x-guest-layout>
+    </div>
+</div>
+@endsection

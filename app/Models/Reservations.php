@@ -19,7 +19,7 @@ class Reservations extends Model
 
 
     public function clients(){
-        return $this->belongsTo(Clients::class,"id");
+        return $this->belongsTo(Clients::class);
     }
     public function DetailsReservations(){
         return $this->belongsTo(DetailsReservation::class);

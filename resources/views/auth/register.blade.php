@@ -1,37 +1,66 @@
-<x-guest-layout>
-    <section class="vh-100 gradient-custom">
-        <div class="container py-5 h-100">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-              <div class="card bg-dark text-white" style="border-radius: 1rem;">
-                <div class="card-body p-5 text-center">
-                    <form method="POST" action="{{ route('register') }}">
+@extends('layouts.app')
+
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {{-- <div class="card mb-2" align="center">
+                <div class="card-header"><h2 class="text-info">{{ __('La chambotte') }}</h2></div>
+            </div> --}}
+            <div class="card" align="center">
+                <div class="card-header"><h2>{{ __('Créer nouveau compte') }}</h2></div>
+
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}" class="row justify-content-center">
                         @csrf
-                        <h3 class="fw-bold mb-2 text-warning">La Chambotte</h3>
-                        <h3 class="fw-bold mb-4 text-success">register</h3>
+                            <div class="col-md-12 mb-3">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nom complet" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                        <div class="form-outline form-white mb-4">
-                            <input type="text"  class="form-control " placeholder="Nmae" name="name" :value="old('name')" required autofocus autocomplete="name"/>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="col-md-12 mb-3">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="E-mail" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-md-12 mb-3">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="Mot de pass" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+
+                            <div class="col-md-12 mb-4">
+                                <input id="password-confirm" type="password" class="form-control" placeholder="Confirmer mot de pass" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+
+
+
+                            <div class="col-md-12 mb-3">
+                                <button type="submit" class="btn btn-primary col-md-12">
+                                    {{ __("S'inscrire") }}
+                                </button>
+
                         </div>
-
-                        <div class="form-outline form-white mb-4">
-                            <input type="email" id="typeEmailX" class="form-control " placeholder="E-mail" type="email" name="email" :value="old('email')" required autocomplete="username" />
-                        </div>
-
-                        <div class="form-outline form-white mb-4">
-                            <input type="password" id="typePasswordX" class="form-control " placeholder="Password" name="password" required autocomplete="new-password"/>
-                        </div>
-
-                        <div class="form-outline form-white mb-4">
-                            <input type="password" id="typePasswordX" class="form-control " placeholder="Confirmation password" name="password_confirmation" required autocomplete="new-password"/>
-                        </div>
-
-                        <button class="btn btn-outline-light btn-lg px-5" type="submit">{{ __('Register') }}</button>
                     </form>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
-</x-guest-layout>
+    </div>
+</div>
+@endsection

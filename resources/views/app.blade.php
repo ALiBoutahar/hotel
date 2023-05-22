@@ -25,11 +25,14 @@
             height: 500px;
             background-color:#ebf3f3;
         }
+        .gradient-custom {
+            /* background: linear-gradient(to right, rgb(57, 239, 6), rgb(54, 248, 222)) */
+        }
     </style>
   </head>
-  <body>
+  <body class="gradient-custom ">
     @include('partials.sidebar')
-        <section class="mx-3 w-100 ">
+        <section class="mx-3 w-100">
             @if ($message = Session::get('success'))
                 <br>
                 <div class="alert alert-success" style="height: 60px">

@@ -9,14 +9,16 @@ class ClientsController extends Controller
     public function index()
     {
         if(request('search1')){
-            $clients = Clients::where('CIN' , 'like' , '%'.request('search1').'%')->orwhere('Nom', 'like' , '%'.request('search2').'%')->get();
+            $clients = Clients::where('CIN' , 'like' , '%'.request('search1').'%')->get();
+        }elseif(request('search2')){
+            $clients = Clients::where('Nom', 'like' , '%'.request('search2').'%')->get();
         }else{
             $clients = Clients::orderByDesc('created_at')->get();
         }
         return view('clients.index',compact('clients'));
 
     }
-   
+
     public function create()
     {
         return view('clients.create');
@@ -38,7 +40,7 @@ class ClientsController extends Controller
 
     public function edit($id)
     {
-        return view("clients.edit",["Clients"=>Clients::findOrFail($id)]);
+        return view("clients.edit",["Clients"=>Clients::findOrFail($id),]);
     }
 
 
@@ -46,7 +48,7 @@ class ClientsController extends Controller
     {
         $updateData = Clients::find($id);
         $updateData->update($request->all());
-        return redirect("/Clients")->with('success', 'Clients modifié avec succès');
+        return redirect("clients")->with('success', 'Clients modifié avec succès');
     }
 
 
@@ -54,6 +56,6 @@ class ClientsController extends Controller
     {
         $updateData = Clients::find($id);
         $updateData->delete($request->all());
-        return redirect('/Clients')->with('success','Clients supprimer avec succès');
+        return redirect('/clients')->with('success','Clients supprimer avec succès');
     }
 }

@@ -4,7 +4,7 @@
     <div class="pt-3">
         <div class="row mt-3">
             <div class="col-lg-1">
-                <a class="btn btn-success" href="{{ url('Chambers')}}"><i class="fas fa-arrow-circle-left" style="color:black"></i></a>
+                <a class="btn btn-success" href="{{ url('chambers')}}"><i class="fas fa-arrow-circle-left" style="color:black"></i></a>
             </div>
             <div class="col-lg-11">
                 <p align="center"><b> Détail Chambers Numéro {{$chambers->NChambre}}</b></p>
@@ -31,9 +31,10 @@
                 <th>Images:</th>
                 <td>
                     <div class="col-lg-12">
-                        @foreach ($chambers->images as $item)
-                            <img src="{{asset('storage/'.$item->url)}}" width="100px">
-                        @endforeach
+                        @php $data = json_decode($chambers->images) @endphp
+                        @for ($i = 0; $i < count($data); $i++)
+                            <img src="{{asset('storage/'.$data[$i])}}" width="100px">
+                        @endfor
                     </div>
                 </td>
             </tr>

@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Chambers;
-use App\Models\Images;
+use App\Http\Requests\StoreChambersRequest;
+use App\Http\Requests\UpdateChambersRequest;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 
@@ -33,25 +34,23 @@ class ChambersController extends Controller
             'titre' => 'required',
             'Description' => 'required',
             'prix' => 'required|integer',
-            'url' => 'required',
+            'images' => 'required',
         ]);
-
         $chambers = new Chambers();
         $chambers->NChambre = $request->NChambre;
         $chambers->titre = $request->titre;
         $chambers->Description = $request->Description;
         $chambers->prix = $request->prix;
-        $chambers->save();
-        if($request->hasfile('url')){
-            foreach($request->file('url') as $image){
-                $path = $image->store('Images','public');
-                $images = new Images();
-                $images->chamber_id = $chambers->id;
-                $images->url = $path;
-                $images->save();
+        if($request->hasfile('images')){
+            foreach($request->file('images') as $image){
+                $name = $image->store('Images','public');
+                $image->move($name);
+                $data[] = $name;
             }
         }
-        return redirect('/Chambers')->with('success' , 'Chambers a bien Ajouter avec success');
+        $chambers->images = json_encode($data);
+        $chambers->save();
+        return redirect('/chambers')->with('success' , 'Chambers a bien Ajouter avec success');
     }
 
 
@@ -71,17 +70,20 @@ class ChambersController extends Controller
     {
         $updateData = Chambers::find($id);
         $updateData->update($request->all());
-        return redirect("/Chambers")->with('success', 'Chambers modifié avec succès');
+        return redirect("chambers")->with('success', 'Chambers modifié avec succès');
     }
 
 
     public function destroy(Request $request, $id)
     {
         $chambers = Chambers::find($id);
-                foreach($chambers->images as $image){
-                 $chambers->delete();
-                File::delete('storage/'.$image->url);  
+            foreach ([$chambers->images] as $image){
+                File::delete('storage/app/public'.$image);
             }
-            return redirect('/Chambers')->with('success','Chambers supprimer avec succès');
+            $chambers->delete();
+            return redirect('/chambers')->with('success','Chambers supprimer avec succès');
+        // $updateData = Chambers::find($id);
+        // $updateData->delete($request->all());
+        // return redirect('/chambers')->with('success','Chambers supprimer avec succès');
     }
 }

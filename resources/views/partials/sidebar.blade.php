@@ -69,21 +69,21 @@
           </a>
         </li>
         <li>
-            <a href="{{ url('Reservations')}}" class="nav-link">
+            <a href="{{ url('reservations')}}" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
               Reservations
             </a>
         </li>
         <li>
-            <a href="{{ url('Clients')}}" class="nav-link">
+            <a href="{{ url('clients')}}" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
               Clients
             </a>
         </li>
         <li>
-            <a href="{{ url('Chambers')}}" class="nav-link">
+            <a href="{{ url('chambers')}}" class="nav-link">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-              Chambres
+              Chambers
             </a>
         </li>
         {{-- <li>
@@ -101,30 +101,20 @@
           <strong>{{ Auth::user()->name }}</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-          {{-- <li><a class="dropdown-item" href="#">New project...</a></li>
-          <li><a class="dropdown-item" href="#">Settings</a></li> --}}
-          <li>
-            <x-responsive-nav-link :href="route('profile.edit')">
-                {{ __('Profile') }}
-            </x-responsive-nav-link>
-          </li>
-          <li><hr class="dropdown-divider"></li>
-          <li>
-            <a href="{{ url('register')}}">
-                Register
-            </a>
-        </li>
-          <li>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-
-                <x-responsive-nav-link :href="route('logout')"
-                        onclick="event.preventDefault();
-                                    this.closest('form').submit();">
-                    {{ __('Log Out') }}
-                </x-responsive-nav-link>
-            </form>
-          </li>
+            {{-- <li><a class="dropdown-item" href="#">New project...</a></li> --}}
+            <li><a class="dropdown-item" href="#">{{ Auth::user()->name }}</a></li>
+            <li><a class="dropdown-item" href="{{ route('register') }}">Créer un compte</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+                <a class="dropdown-item" href="{{ route('logout') }}"
+                    onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                    {{ __('Déconnexion') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
+            </li>
         </ul>
       </div>
     </div>
